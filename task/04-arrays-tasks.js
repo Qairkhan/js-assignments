@@ -417,7 +417,7 @@ function toStringList(arr) {
  *      { country: 'Russia',  city: 'Saint Petersburg' }
  */
 function sortCitiesArray(arr) {
-   throw new Error('Not implemented');
+   return arr.sort((a, b) => (a.country == b.country)? a.city.localeCompare(b.city) : a.country.localeCompare(b.country));
 }
 
 /**
@@ -439,7 +439,11 @@ function sortCitiesArray(arr) {
  *           [0,0,0,0,1]]   
  */
 function getIdentityMatrix(n) {
-   throw new Error('Not implemented');
+   return Array.from({ length: n }, (_, i) => {
+      let row = new Array(n).fill(0);
+      row[i] = 1;
+      return row;
+});
 }
 
 /**
@@ -456,7 +460,7 @@ function getIdentityMatrix(n) {
  *     3, 3   => [ 3 ]
  */
 function getIntervalArray(start, end) {
-   throw new Error('Not implemented');
+   return Array.from({ length: end - start + 1 }, (_, i) => i + start);
 }
 
 /**
@@ -471,7 +475,7 @@ function getIntervalArray(start, end) {
  *   [ 1, 1, 2, 2, 3, 3, 4, 4] => [ 1, 2, 3, 4]
  */
 function distinct(arr) {
-   throw new Error('Not implemented');
+   return Array.from(new Set(arr));
 }
 
 /**
@@ -505,7 +509,17 @@ function distinct(arr) {
  *   }
  */
 function group(array, keySelector, valueSelector) {
-   throw new Error('Not implemented');
+   let ans = new Map();
+    array.map((elem) => {
+        let key = keySelector(elem);
+        let val = valueSelector(elem);
+        if (ans.has(key)) {
+            ans.get(key).push(val);
+        } else {
+            ans.set(key, [val]);
+        }
+    });
+return ans;
 }
 
 
@@ -521,7 +535,7 @@ function group(array, keySelector, valueSelector) {
  *   ['one','two','three'], x=>x.split('')  =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
 function selectMany(arr, childrenSelector) {
-    throw new Error('Not implemented');
+   return arr.reduce((prev, curr) => prev.concat(childrenSelector(curr)), []);
 }
 
 
@@ -538,7 +552,10 @@ function selectMany(arr, childrenSelector) {
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
 function getElementByIndexes(arr, indexes) {
-    throw new Error('Not implemented');
+   indexes.map((elem) => {
+      arr = arr[elem];
+  });
+  return arr;
 }
 
 
@@ -561,7 +578,11 @@ function getElementByIndexes(arr, indexes) {
  * 
  */
 function swapHeadAndTail(arr) {
-    throw new Error('Not implemented');
+   let len = arr.length;
+   let half_length = Math.floor(len / 2);
+   let head = arr.splice(0, half_length);
+   let tail = arr.splice(len % 2 ? 1 : 0);
+   return tail.concat(arr).concat(head);
 }
 
 
