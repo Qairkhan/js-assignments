@@ -30,7 +30,8 @@
  *
  */
 function getFizzBuzz(num) {
-    throw new Error('Not implemented');
+    let ans = "" + (num % 3 == 0 ? "Fizz" : "") + (num % 5 == 0 ? "Buzz" : "");
+    return ans || num;
 }
 
 
@@ -46,7 +47,7 @@ function getFizzBuzz(num) {
  *   10 => 3628800
  */
 function getFactorial(n) {
-    throw new Error('Not implemented');
+    return (n > 1) ? getFactorial(n-1) * n : 1;
 }
 
 
@@ -63,7 +64,12 @@ function getFactorial(n) {
  *   -1,1  =>  0  ( = -1 + 0 + 1 )
  */
 function getSumBetweenNumbers(n1, n2) {
-    throw new Error('Not implemented');
+    let res = 0;
+    while (n1 <= n2) {
+        res += n1;
+        n1 += 1;
+    }
+    return res;
 }
 
 
@@ -82,7 +88,8 @@ function getSumBetweenNumbers(n1, n2) {
  *   10,10,10 =>  true
  */
 function isTriangle(a,b,c) {
-    throw new Error('Not implemented');
+    let sorted_sides = [a, b, c].sort((a, b) => b-a);
+    return (sorted_sides[0] < sorted_sides[1] + sorted_sides[2]) ? true : false;
 }
 
 
@@ -119,7 +126,10 @@ function isTriangle(a,b,c) {
  *  
  */
 function doRectanglesOverlap(rect1, rect2) {
-    throw new Error('Not implemented');
+    if (rect1.top > rect2.top)
+        // [rect1,rect2] = [rect2,rect1];
+        rect2 = [rect1, rect1 = rect2][0];
+    return rect1.top + rect1.height > rect2.top && rect1.left + rect1.width > rect2.left;
 }
 
 
@@ -150,7 +160,8 @@ function doRectanglesOverlap(rect1, rect2) {
  *   
  */
 function isInsideCircle(circle, point) {
-    throw new Error('Not implemented');
+    return Math.sqrt(Math.pow(point.x - circle.center.x, 2)
++ Math.pow(point.y - circle.center.y, 2)) < circle.radius;
 }
 
 
@@ -166,7 +177,12 @@ function isInsideCircle(circle, point) {
  *   'entente' => null
  */
 function findFirstSingleChar(str) {
-    throw new Error('Not implemented');
+    for (let i = 0; i < str.length; i++){        
+        if (str.indexOf(str[i]) == i && str.indexOf(str[i], i + 1) == -1) {
+            return str[i];  
+        }     
+    }
+    return null;
 }
 
 
@@ -192,7 +208,7 @@ function findFirstSingleChar(str) {
  *
  */
 function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
-    throw new Error('Not implemented');
+    return (isStartIncluded?"[":"(") + Math.min(a, b) + ", " + Math.max(a, b) + (isEndIncluded?"]":")");
 }
 
 
